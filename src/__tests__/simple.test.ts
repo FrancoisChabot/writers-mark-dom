@@ -54,6 +54,16 @@ test.serial('single paragraph', (t) => {
   t.is(paragraphs.length, 1);
 });
 
+test.serial('styled paragraph', (t) => {
+  const [stylesheet, styleMap] = createStyleElement(testStyle);
+
+  const ast = compileAst('a\nhello!', testStyle);
+  const paragraphs = render(ast, styleMap);
+
+  t.is(paragraphs.length, 1);
+});
+
+
 test.serial('multiple paragraphs', (t) => {
   const [stylesheet, styleMap] = createStyleElement(testStyle);
 
@@ -98,7 +108,7 @@ test.serial('Nested span', (t) => {
 test.serial('Custom default p rule', (t) => {
   const [stylesheet, styleMap] = createStyleElement(testStyle);
 
-  const ast = compileAst('hello *Wo_r_ld*!', testStyle, { defaultPRule: 'a' });
+  const ast = compileAst('hello *Wo_r_ld*!', testStyle);
   const paragraphs = render(ast, styleMap, { defaultPRule: 'a' });
 
   t.is(paragraphs.length, 1);

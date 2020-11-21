@@ -84,8 +84,14 @@ export const render = (ast: AST, classMapping: Record<string, string>, options?:
   for (const p of ast.paragraphs) {
     const pElem = document.createElement('p');
 
-    const ruleName = p.style || options?.defaultPRule || defaultParagraphRule;
-    pElem.classList.add(classMapping['p_' + ruleName]);
+    if (p.styles) {
+      for (const s of p.styles) {
+        pElem.classList.add(classMapping['p_' + s]);
+      }
+    } else {
+      const ruleName = options?.defaultPRule || defaultParagraphRule;
+      pElem.classList.add(classMapping['p_' + ruleName]);
+    }
 
     for (const section of p.contents) {
       pElem.appendChild(renderSection(section, classMapping));
