@@ -63,7 +63,6 @@ test.serial('styled paragraph', (t) => {
   t.is(paragraphs.length, 1);
 });
 
-
 test.serial('multiple paragraphs', (t) => {
   const [stylesheet, styleMap] = createStyleElement(testStyle);
 
